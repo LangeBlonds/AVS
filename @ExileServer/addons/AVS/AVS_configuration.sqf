@@ -41,14 +41,16 @@ AVS_DisableVehicleNVG =
 AVS_GlobalWeaponBlacklist =
 [
 //	"WeaponClassName"
-	"missiles_DAR" 				// Removes DAR missiles from all vehicles
+	"missiles_DAR", 				// Removes DAR missiles from all vehicles
+	"missiles_DAGR"
 ];
 
 // Any ammo classes listed here will be sanitized from all vehicles.
 AVS_GlobalAmmoBlacklist =
 [
 //	"AmmoClassName"
-	"24Rnd_missiles"
+	"24Rnd_missiles",
+	"12Rnd_PG_missiles"
 ];
 
 // You may remove specific weapon classes from specific vehicle classes here.
@@ -69,7 +71,7 @@ AVS_VehicleAmmoBlacklist =
 AVS_RearmSystemActive = true;
 
 // Distance away from an object to get the rearm option.
-AVS_RearmDistance = 30;
+AVS_RearmDistance = 10;
 
 // Number of seconds it takes to rearm. (NOT YET IMPLEMENTED)
 AVS_RearmTime = 15;
@@ -83,7 +85,9 @@ AVS_RearmObjects =
 //	"ClassName"
 	//"Land_fs_feed_F"	// Gas station pump.
 	"Land_Hangar_F",
-	"Land_TentHangar_V1_F"
+	"Land_TentHangar_V1_F",
+	"Land_HelipadSquare_F",
+	"Land_HelipadCircle_F"
 ];
 
 // Default cost of a magazine if not found in AVS_RearmCosts
@@ -93,27 +97,33 @@ AVS_RearmCostDefault = 99999999;
 AVS_RearmCosts =
 [
 //	["MagazineClassName", cost]
-	["Laserbatteries", 0],						// Laser Designator Batteries
-	["SmokeLauncherMag", 20],					// Smoke CM magazine
-	["200Rnd_127x99_mag_Tracer_Yellow", 400],	// Strider HMG gun
-	["200Rnd_127x99_mag_Tracer_Red", 400],		// Hunter HMG gun
-	["168Rnd_CMFlare_Chaff_Magazine", 20],		// Helicopter flares
-	["2000Rnd_65x39_Belt_Tracer_Red", 4000],	// Ghosthawk guns
-	["100Rnd_127x99_mag_Tracer_Yellow", 200],	// Armed Offroad magazine.
-	["5000Rnd_762x51_Belt", 1000]				// Pawnee belt
+	["Laserbatteries", 0],								// Laser Designator Batteries
+	["SmokeLauncherMag", 20],							// Smoke CM magazine
+	["200Rnd_127x99_mag_Tracer_Yellow", 400],			// Strider HMG gun
+	["200Rnd_127x99_mag_Tracer_Red", 400],				// Hunter HMG gun
+	["168Rnd_CMFlare_Chaff_Magazine", 20],				// Helicopter flares
+	["2000Rnd_65x39_Belt_Tracer_Red", 4000],			// Ghosthawk & Huron guns
+	["100Rnd_127x99_mag_Tracer_Yellow", 200],			// Armed Offroad magazine.
+	["5000Rnd_762x51_Belt", 6000],						// Pawnee belt
+	["5000Rnd_762x51_Yellow_Belt", 6000],				// Hellcat belt
+	["2000Rnd_65x39_Belt_Tracer_Green_Splash", 4000]	// Orca belt
 ];
 
 //**************************************************************
 
 // Disabled stock refueling at fuel trucks / gas pumps.
-AVS_DisableStockRefuel = false;
+AVS_DisableStockRefuel = true;
 
-AVS_RefuelSystemActive = false;
-AVS_RefuelDistance = 15;
+// Use AVS Refuel System
+AVS_RefuelSystemActive = true;
+
+// Use AVS to fill Fuel-Canister with AVS Refuel Objects (Gas Station Pump). It's active only if AVS Refuel System is active too.
+AVS_FillCanisterActive = true;	// Remember to disable "Exile fill canister empty", to do this see Installation.txt
+
+AVS_RefuelDistance = 8.2;	// 8.2 is minimum distance to refuel on roof of every gas stations with a chopper.
 AVS_RefuelObjects =
 [
-	"Land_fs_feed_F", // Gas Station Pump
-	"Exile_Car_Van_Fuel_Abstract"
+	"Land_fs_feed_F" // Gas Station Pump
 ];
 
 AVS_RefuelCost = 5; // 5 poptabs/liter

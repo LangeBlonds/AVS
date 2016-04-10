@@ -6,7 +6,36 @@ Installation:
 4) Merge the files from AVS\mpmissions\Exile.Altis into your mission file. 
   - ***NOTE: Make SURE you don't place the AVS init line inside an 'if !(isServer) then {...' block!***
 5) Read the battlEye.txt file to setup your battleye filters.
-6) Execute the following query on your exile MySQL database:
+6) To disable "Exile fill canister empty", go in your config.cpp of your mission.pbo and change this:
+********************************************************
+	class FuelSource
+	{
+		name = "Fuel pumps, stations or barrels";
+		models[] = 
+		{
+			"fuelstation_feed_f.p3d",
+			"metalbarrel_f.p3d",
+			"flexibletank_01_f.p3d",
+			"fs_feed_f.p3d"
+		};	
+	};
+********************************************************
+By this:
+********************************************************
+	class FuelSource
+	{
+		name = "Fuel pumps, stations or barrels";
+		models[] = 
+		{
+			"fuelstation_feed_f.p3d",
+			"metalbarrel_f.p3d",
+			"flexibletank_01_f.p3d"
+			//"fs_feed_f.p3d"
+		};	
+	};
+********************************************************
+
+7) Execute the following query on your exile MySQL database:
 
 ALTER TABLE vehicle  
 ADD ammo text  

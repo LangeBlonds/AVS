@@ -77,4 +77,4 @@ if (AVS_DisableStockRearm) then
 if (AVS_DisableStockRefuel) then
 {
 	_vehicle setFuelCargo 0;
-}
+};
