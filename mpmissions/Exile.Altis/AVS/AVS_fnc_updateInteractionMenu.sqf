@@ -34,7 +34,6 @@ if (hasInterface) then
 
 		if (AVS_RefuelSystemActive && AVS_FillCanisterActive && {_vehicle isEqualTo player}) then 
 		{
-			diag_log "AVS fill, Etape 1: refuel et fill actif et joueur a pied";
 			_vehicle = player;
 			_fillPoints = 0;
 
@@ -48,19 +47,16 @@ if (hasInterface) then
 			{
 				if (!AVS_fillActionAdded) then 
 				{
-					diag_log "AVS fill, Etape 2: ajout de l'action car proche d'une station et avec un jerrican ds les poches";
 					_canisterEmptyCost = _vehicle call AVS_fnc_getFillCanCost;
 					_fillTitle = format ["Fill canister empty: %1 poptabs", _canisterEmptyCost];
 					AVS_fillAction = player addAction [_fillTitle, AVS_fnc_requestFillCanister, [_vehicle]];
 					AVS_fillActionAdded = true;
 				};
-				diag_log "AVS fill, Etape 3: ne fait rien apres l'etape 2";
 			}
 			else
 			{
 				if (AVS_fillActionAdded) then
 				{
-					diag_log "AVS fill, Etape 4: retire l'action si loin de la station et/ou si plus de jerrican vide";
 					player removeAction AVS_fillAction;
 					AVS_fillActionAdded = false;
 				};
@@ -70,7 +66,6 @@ if (hasInterface) then
 		{
 			if (AVS_fillActionAdded) then
 			{
-				diag_log "AVS fill, Etape 5: retire l'action si joueur ds un vehicule";
 				player removeAction AVS_fillAction;
 				AVS_fillActionAdded = false;
 			};
@@ -118,6 +113,7 @@ if (hasInterface) then
 					if (AVS_rearmActionAdded && {!(AVS_previousRearmCost isEqualTo _rearmCost)}) then
 					{
 						player removeAction AVS_rearmAction;
+						AVS_rearmActionAdded = false;
 					};
 
 					if (_rearmCost > 0) then
@@ -168,6 +164,7 @@ if (hasInterface) then
 					if (AVS_refuelActionAdded && {!(AVS_previousRefuelCost isEqualTo _refuelCost)}) then
 					{
 						player removeAction AVS_refuelAction;
+						AVS_refuelActionAdded = false;
 					};
 
 					if (_refuelCost > 0) then
