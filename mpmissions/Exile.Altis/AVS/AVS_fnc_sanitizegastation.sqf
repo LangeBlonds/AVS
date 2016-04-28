@@ -13,12 +13,12 @@ if (AVS_DisableStockRefuel) then
 	_radiusmap sort false;
 	_radiusmap = _radiusmap select 0;
 
-	_gastation = nearestobjects [_centermap, ["Land_fs_feed_F"], _radiusmap];
+	_gastation = nearestobjects [_centermap, AVS_RefuelObjects, _radiusmap];
 	Gastation_locations = [];
 	{Gastation_locations = Gastation_locations + [getpos _x]} foreach _gastation;
 
 	{
-		_gastationToEmpty = nearestObjects [_x, ["Land_fs_feed_F"], 10];
+		_gastationToEmpty = nearestObjects [_x, AVS_RefuelObjects, 10];
 		{ _x setFuelCargo 0; } forEach _gastationToEmpty;
 	} foreach Gastation_locations;
 	diag_log "Disable Gas Station finished";
