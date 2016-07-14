@@ -44,7 +44,7 @@ if (AVS_RearmSystemActive || AVS_RefuelSystemActive) then
 			AVS_fnc_requestFillCanister = compileFinal (preprocessFileLineNumbers "AVS\AVS_fnc_requestFillCanister.sqf");
 		};
 	};
-	AVS_fnc_setPlayerMoney = compileFinal (preprocessFileLineNumbers "AVS\AVS_fnc_setPlayerMoney.sqf");
+	//AVS_fnc_setPlayerMoney = compileFinal (preprocessFileLineNumbers "AVS\AVS_fnc_setPlayerMoney.sqf");
 	AVS_fnc_updateInteractionMenu = compileFinal (preprocessFileLineNumbers "AVS\AVS_fnc_updateInteractionMenu.sqf");
 
 	//diag_log format ["!hasInterfaction: %1; isServer: %2", !hasInterface, isServer];

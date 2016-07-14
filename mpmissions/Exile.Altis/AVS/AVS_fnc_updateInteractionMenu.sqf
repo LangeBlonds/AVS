@@ -2,6 +2,7 @@
 © 2015 Zenix Gaming Ops
 Developed by Rod-Serling
 Co-Developed by Vishpala
+Modified by Vandest
 
 All rights reserved.
 
@@ -22,7 +23,8 @@ if (hasInterface) then
 
 	AVS_refuelAction = 0;
 	AVS_refuelActionAdded = false;
-	AVS_previousRefuelCost = 0;
+	AVS_Refueling = false;
+	AVS_CanRefuel = false;
 
 	AVS_fillAction = 0;
 	AVS_fillActionAdded = false;
@@ -48,7 +50,7 @@ if (hasInterface) then
 				if (!AVS_fillActionAdded) then 
 				{
 					_canisterEmptyCost = _vehicle call AVS_fnc_getFillCanCost;
-					_fillTitle = format ["Fill canister empty: %1 poptabs", _canisterEmptyCost];
+					_fillTitle = format ["<t size='1' shadow='1'><t color='#00F600'>Fill canister empty: %1 poptabs</t>", _canisterEmptyCost];
 					AVS_fillAction = player addAction [_fillTitle, AVS_fnc_requestFillCanister, [_vehicle]];
 					AVS_fillActionAdded = true;
 				};
@@ -147,48 +149,64 @@ if (hasInterface) then
 
 
 			// Refuel:
+			if (_pos select 2 > 4.5) then 	// AVS_RefuelDistance for choppers
+			{
+				AVS_RefuelDist = 10;
+				AVS_AirVehicle = true;
+			} 
+			else 							// AVS_RefuelDistance for ground vehicles
+			{
+				AVS_RefuelDist = AVS_RefuelDistance;
+				AVS_AirVehicle = false;
+			};
 
 			if (AVS_RefuelSystemActive && (_pos select 2 < 5.1)) then
 			{
-				_refuelPoints = 0;			
+				_refuelPoints = 0;
+
 				{
-					_refuelObjects = (_vehicle nearObjects [_x, AVS_RefuelDistance]);		// Same to rearm
+					_refuelObjects = (_vehicle nearObjects [_x, AVS_RefuelDist]);		// Same to rearm
 					if (count _refuelObjects > 0) exitWith {_refuelPoints = 1};
 				}
 				forEach AVS_RefuelObjects;
 
 				if (_refuelPoints > 0) then
 				{
-					_refuelCost = _vehicle call AVS_fnc_getRefuelCost;
+					AVS_CanRefuel = true;
 
-					if (AVS_refuelActionAdded && {!(AVS_previousRefuelCost isEqualTo _refuelCost)}) then
+					if (!AVS_refuelActionAdded) then 
+					{
+						if (!AVS_Refueling) then {
+							private ["_title", "_description"];
+							_title = "<t size='2' shadow='1'><t color='#00F600'>Start Refueling</t>";
+							_description = format ["<t size='1' shadow='1'><t color='#FFFFFF'>Fuel price: %1 Poptabs/L</t>", AVS_FuelCost];
+							_refuelTitle = [_title, _description] joinString "<br />";
+							AVS_refuelAction = player addAction [_refuelTitle, AVS_fnc_requestRefuel, [_vehicle]];
+							AVS_refuelActionAdded = true;
+						}
+						else
+						{
+							if (AVS_refuelActionAdded) then
+							{
+								player removeAction AVS_refuelAction;
+								AVS_refuelActionAdded = false;
+							};
+						};
+					};
+				}
+				else
+				{
+					AVS_CanRefuel = false;
+					if (AVS_refuelActionAdded) then
 					{
 						player removeAction AVS_refuelAction;
 						AVS_refuelActionAdded = false;
-					};
-
-					if (_refuelCost > 0) then
-					{
-						if (!AVS_refuelActionAdded) then 
-						{
-							_refuelTitle = format ["Refuel: %1 poptabs", _refuelCost];
-							AVS_refuelAction = player addAction [_refuelTitle, AVS_fnc_requestRefuel, [_vehicle]];
-							AVS_previousRefuelCost = _refuelCost;
-							AVS_refuelActionAdded = true;
-						};
-					}
-					else
-					{
-						if (AVS_refuelActionAdded) then
-						{
-							player removeAction AVS_refuelAction;
-							AVS_refuelActionAdded = false;
-						};
 					};
 				};
 			}
 			else
 			{
+				AVS_CanRefuel = false;
 				if (AVS_refuelActionAdded) then
 				{
 					player removeAction AVS_refuelAction;
@@ -205,6 +223,8 @@ if (hasInterface) then
 					player removeAction AVS_rearmAction;
 					AVS_rearmActionAdded = false;
 				};
+
+				AVS_CanRefuel = false;
 				if (AVS_refuelActionAdded) then
 				{
 					player removeAction AVS_refuelAction;

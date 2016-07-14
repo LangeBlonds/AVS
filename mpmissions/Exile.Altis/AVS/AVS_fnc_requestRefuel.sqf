@@ -25,4 +25,4 @@ if (!_OK) exitWith
 	diag_log format ["AVS Error: Calling AVS_fnc_requestRefuel with invalid parameters: %1",_this];
 };
 
-[ExileClientSessionId, _vehicle] remoteExecCall ["AVS_fnc_refuelVehicle", 2];
+[_vehicle] remoteExecCall ["AVS_fnc_refuelVehicle", 2];

@@ -36,27 +36,30 @@ _vehicle setVehicleAmmoDef 0;
 
 if (typeName _savedMagazines isEqualTo "ARRAY") then
 {
+	if (typeName (_savedMagazines select 0) isEqualTo "ARRAY") then
 	{
-		_turretPath = _x select 0;
-
-		for "_i" from (count _x - 1) to 1 step -1 do
 		{
-			_magData = _x select _i;
-			_magClass = _magData select 0;
-			_ammoCount = _magData select 1;
-
-			_maxMagAmmo = (configFile >> "CfgMagazines" >> _magClass >> "count") call BIS_fnc_getCfgData;
-			_numMags = ceil (_ammoCount / _maxMagAmmo);
-
-			while {_numMags > 1} do
+			_turretPath = _x select 0;
+	
+			for "_i" from (count _x - 1) to 1 step -1 do
 			{
-				_vehicle addMagazineTurret [_magClass, _turretPath];
-				_numMags = _numMags - 1;
-				_ammoCount = _ammoCount - _maxMagAmmo;
+				_magData = _x select _i;
+				_magClass = _magData select 0;
+				_ammoCount = _magData select 1;
+	
+				_maxMagAmmo = (configFile >> "CfgMagazines" >> _magClass >> "count") call BIS_fnc_getCfgData;
+				_numMags = ceil (_ammoCount / _maxMagAmmo);
+	
+				while {_numMags > 1} do
+				{
+					_vehicle addMagazineTurret [_magClass, _turretPath];
+					_numMags = _numMags - 1;
+					_ammoCount = _ammoCount - _maxMagAmmo;
+				};
+				_vehicle setMagazineTurretAmmo [_magClass, _ammoCount, _turretPath];
 			};
-			_vehicle setMagazineTurretAmmo [_magClass, _ammoCount, _turretPath];
-		};
-	} forEach _savedMagazines;
+		} forEach _savedMagazines;
+	};
 }
 else
 {

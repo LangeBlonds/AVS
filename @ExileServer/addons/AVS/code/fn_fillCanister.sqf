@@ -29,16 +29,16 @@ _canisterEmptyCost = _vehicle call AVS_fnc_getFillCanCost;
 
 if (_playerMoney < _canisterEmptyCost) exitWith
 {
-	[_owner, "notificationRequest", ["Whoops", ["You don't have enough poptabs!"]]] call ExileServer_system_network_send_to;
+	[_owner, "toastRequest", ["ErrorTitleAndText", ["Fill Canister", "You don't have enough poptabs!"]]] call ExileServer_system_network_send_to;
 };
 
 [_vehicle] remoteExec ["AVS_fnc_fillCanisterClient", _vehicle];
 
 _playerMoney = _playerMoney - _canisterEmptyCost;
-_owner setVariable ["ExileMoney", _playerMoney];
-format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _owner)] call ExileServer_system_database_query_fireAndForget;
-[_playerMoney] remoteExec ["AVS_fnc_setPlayerMoney", _owner];
+_owner setVariable ["ExileMoney", _playerMoney, true];
+format["setPlayerMoney:%1:%2", _playerMoney, _owner getVariable ["ExileDatabaseID", 0]] call ExileServer_system_database_query_fireAndForget;
+//[_playerMoney] remoteExec ["AVS_fnc_setPlayerMoney", _owner];
 
-[_owner, "notificationRequest", ["Success", ["Fuel canister filled!"]]] call ExileServer_system_network_send_to;
+[_owner, "toastRequest", ["SuccessTitleOnly", ["Fuel canister filled!"]]] call ExileServer_system_network_send_to;
 
 _vehicle call ExileServer_object_player_database_update;

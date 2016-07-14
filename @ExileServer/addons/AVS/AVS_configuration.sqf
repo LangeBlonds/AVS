@@ -8,6 +8,8 @@ Function:
 	AVS_configuration - Defines the configuration for AVS.
 */
 
+AVS_Debug = false;
+
 // This array contains world center and radius for maps supported.
 AVS_WorldInfo =
 [
@@ -106,7 +108,10 @@ AVS_RearmCosts =
 	["100Rnd_127x99_mag_Tracer_Yellow", 200],			// Armed Offroad magazine.
 	["5000Rnd_762x51_Belt", 6000],						// Pawnee belt
 	["5000Rnd_762x51_Yellow_Belt", 6000],				// Hellcat belt
-	["2000Rnd_65x39_Belt_Tracer_Green_Splash", 4000]	// Orca belt
+	["2000Rnd_65x39_Belt_Tracer_Green_Splash", 4000],	// Orca belt
+	["200Rnd_762x51_Belt_Green", 500],					// BRDM2_HQ
+	["50Rnd_127x107_DSHKM_M", 350],						// BTR40_MG
+	["2000Rnd_762x51_Belt", 2400]						// HMMWV_M134
 ];
 
 //**************************************************************
@@ -118,15 +123,15 @@ AVS_DisableStockRefuel = true;
 AVS_RefuelSystemActive = true;
 
 // Use AVS to fill Fuel-Canister with AVS Refuel Objects (Gas Station Pump). It's active only if AVS Refuel System is active too.
-AVS_FillCanisterActive = true;	// Remember to disable "Exile fill canister empty", to do this see Installation.txt
 
-AVS_RefuelDistance = 8.2;	// 8.2 is minimum distance to refuel on roof of every gas stations with a chopper.
 AVS_RefuelObjects =
 [
 	"Land_fs_feed_F" // Gas Station Pump
 ];
 
-AVS_RefuelCost = 5; // 5 poptabs/liter
+AVS_FuelCost = 5;					// 5 poptabs/liter
+AVS_RefuelSpeed = 3;				// 3 liters/second (for ground vehicles, small tank)
+AVS_RefuelSpeedAirVehicle = 20;		// 20 liters/second (for air vehicles, big tank so need to be faster)
 
 //**************************************************************
 

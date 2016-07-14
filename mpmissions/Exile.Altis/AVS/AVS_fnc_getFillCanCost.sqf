@@ -19,5 +19,5 @@ if (!_OK) exitWith
 
 _litersToRefuel = 20;
 
-_totalCost = AVS_RefuelCost * _litersToRefuel;
+_totalCost = AVS_FuelCost * _litersToRefuel;
 _totalCost

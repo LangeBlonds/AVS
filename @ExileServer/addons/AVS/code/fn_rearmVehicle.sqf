@@ -35,7 +35,8 @@ _rearmCost = _vehicle call AVS_fnc_getRearmCost;
 
 if (_playerMoney < _rearmCost) exitWith
 {
-	[_owner, "notificationRequest", ["Whoops", ["You don't have enough poptabs!"]]] call ExileServer_system_network_send_to;
+	//[_owner, "notificationRequest", ["Whoops", ["You don't have enough poptabs!"]]] call ExileServer_system_network_send_to;
+	[_owner, "toastRequest", ["ErrorTitleAndText", ["Rearm","You don't have enough poptabs!"]]] call ExileServer_system_network_send_to;
 };
 
 {
@@ -43,12 +44,13 @@ if (_playerMoney < _rearmCost) exitWith
 } forEach crew _vehicle;
 
 _playerMoney = _playerMoney - _rearmCost;
-_owner setVariable ["ExileMoney", _playerMoney];
-format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _owner)] call ExileServer_system_database_query_fireAndForget;
-[_playerMoney] remoteExec ["AVS_fnc_setPlayerMoney", _owner];
+_owner setVariable ["ExileMoney", _playerMoney, true];
+format["setPlayerMoney:%1:%2", _playerMoney, _owner getVariable ["ExileDatabaseID", 0]] call ExileServer_system_database_query_fireAndForget;
+//[_playerMoney] remoteExec ["AVS_fnc_setPlayerMoney", _owner];
 
 {
-	[_x, "notificationRequest", ["Success", ["Vehicle rearmed!"]]] call ExileServer_system_network_send_to;
+	//[_x, "notificationRequest", ["Success", ["Vehicle rearmed!"]]] call ExileServer_system_network_send_to;
+	[_x, "toastRequest", ["SuccessTitleOnly", ["Vehicle rearmed!"]]] call ExileServer_system_network_send_to;
 }
 forEach crew _vehicle;
 
