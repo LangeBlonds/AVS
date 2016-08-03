@@ -7,18 +7,20 @@ Installation:
 
 3) Drop the "AVS.pbo" file into your server directory (for exemple: Arma 3 Server\@ExileServer\addons\. Where there is exile_server.pbo).
 
-4) Unpack your mission file (for exemple: "Exile.Altis.pbo") with PBO Manager.
+4) Drop the "avs.ini" into your "extDB\sql_custom_v2" folder.
 
-5) Put the "mpmissions\Exile.Yourmap\AVS" folder into the folder you got in step 4.
+5) Unpack your mission file (for exemple: "Exile.Altis.pbo") with PBO Manager.
 
-6) Merge the "description.ext" and "init.sqf" files with those you get into your mission folder.
+6) Put the "mpmissions\Exile.Yourmap\AVS" folder into the folder you got in step 4.
+
+7) Merge the "description.ext" and "init.sqf" files with those you get into your mission folder.
   - ***NOTE: Make SURE you don't place the AVS init line inside an 'if !(isServer) then {...' block!***
 
-7) Repack your mission folder to a pbo file.  
+8) Repack your mission folder to a pbo file.  
   
-8) Read the battlEye.txt file to setup your battleye filters.
+9) Read the battlEye.txt file to setup your battleye filters.
 
-9) Execute the following query on your exile MySQL database:
+10) Execute the following query on your exile MySQL database:
 
 ALTER TABLE vehicle  
 ADD ammo text  
