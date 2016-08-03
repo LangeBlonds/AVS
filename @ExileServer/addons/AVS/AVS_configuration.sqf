@@ -13,10 +13,11 @@ AVS_Debug = false;
 // This array contains world center and radius for maps supported.
 AVS_WorldInfo =
 [
-    ["Altis", [15350, 15350, 0], 15350],
+    ["Altis", [15360, 15360, 0], 15360],
     ["Esseker", [6150,6150,0], 6150],
     ["Chernarus", [7700,8500,0], 11000],
-	["Lingor3", [4968.00,4938.00,0], 10000]
+	["Lingor3", [4968.00,4938.00,0], 10000],
+	["Tanoa", [7680,7680,0], 7680]
 ];
 
 //**************************************************************
@@ -52,7 +53,9 @@ AVS_GlobalAmmoBlacklist =
 [
 //	"AmmoClassName"
 	"24Rnd_missiles",
-	"12Rnd_PG_missiles"
+	"12Rnd_missiles",
+	"12Rnd_PG_missiles",
+	"24Rnd_PG_missiles"
 ];
 
 // You may remove specific weapon classes from specific vehicle classes here.
@@ -103,7 +106,7 @@ AVS_RearmCosts =
 	["SmokeLauncherMag", 20],							// Smoke CM magazine
 	["200Rnd_127x99_mag_Tracer_Yellow", 400],			// Strider HMG gun
 	["200Rnd_127x99_mag_Tracer_Red", 400],				// Hunter HMG gun
-	["168Rnd_CMFlare_Chaff_Magazine", 20],				// Helicopter flares
+	["168Rnd_CMFlare_Chaff_Magazine", 20],				// Helicopter/Y-32 flares
 	["2000Rnd_65x39_Belt_Tracer_Red", 4000],			// Ghosthawk & Huron guns
 	["100Rnd_127x99_mag_Tracer_Yellow", 200],			// Armed Offroad magazine.
 	["5000Rnd_762x51_Belt", 6000],						// Pawnee belt
@@ -111,7 +114,16 @@ AVS_RearmCosts =
 	["2000Rnd_65x39_Belt_Tracer_Green_Splash", 4000],	// Orca belt
 	["200Rnd_762x51_Belt_Green", 500],					// BRDM2_HQ
 	["50Rnd_127x107_DSHKM_M", 350],						// BTR40_MG
-	["2000Rnd_762x51_Belt", 2400]						// HMMWV_M134
+	["2000Rnd_762x51_Belt", 2400],						// HMMWV_M134
+	["500Rnd_65x39_Belt_Tracer_Green_Splash", 1000],	// Qilin belt
+	["100Rnd_127x99_mag_Tracer_Red", 200],				// Prowler HMG mag
+	["130Rnd_338_Mag", 260],							// Prowler MMG mag
+	["240Rnd_CMFlare_Chaff_Magazine", 29],				// Blackfish flares
+	//["240Rnd_40mm_GPR_Tracer_Red_shells", 430],			// Blackfish autocannon
+	//["160Rnd_40mm_APFSDS_Tracer_Red_shells", 290],		// Blackfish autocannon
+	//["100Rnd_105mm_HEAT_MP", 480],						// Blackfish cannon 105mm
+	["4000Rnd_20mm_Tracer_Red_shells", 4800],			// Blackfish gatling 20mm
+	["250Rnd_30mm_HE_shells_Tracer_Green", 860]			// Y-32 gatling 30mm
 ];
 
 //**************************************************************
@@ -128,7 +140,12 @@ AVS_FillCanisterActive = true; // Remember to disable "Exile fill canister empty
 AVS_RefuelDistance = 5;	//  maximum distance to refuel. It doesn't affect the choppers that refuel on roof.
 AVS_RefuelObjects =
 [
-	"Land_fs_feed_F" // Gas Station Pump
+	//"Land_fs_feed_F", 			// Gas Station Pump (Altis)
+	//"Land_FuelStation_Feed_F",	// Stratis/Esseker
+	//"Land_A_FuelStation_Shed",	// Esseker/Chernarus
+	//"Land_A_FuelStation_Feed",	// Chernarus
+	"Land_FuelStation_01_pump_F",	// Tanoa
+	"Land_FuelStation_02_pump_F"
 ];
 
 AVS_FuelCost = 5;					// 5 poptabs/liter
