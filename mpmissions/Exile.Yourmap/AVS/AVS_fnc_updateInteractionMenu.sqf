@@ -149,7 +149,7 @@ if (hasInterface) then
 
 
 			// Refuel:
-			if (_pos select 2 > 4.5) then 	// AVS_RefuelDistance for choppers
+			if (_pos select 2 > 4) then 	// AVS_RefuelDistance for choppers
 			{
 				AVS_RefuelDist = 15;
 				AVS_AirVehicle = true;
@@ -160,7 +160,7 @@ if (hasInterface) then
 				AVS_AirVehicle = false;
 			};
 
-			if (AVS_RefuelSystemActive && (_pos select 2 < 5.1)) then
+			if (AVS_RefuelSystemActive && (_pos select 2 < 7.5)) then
 			{
 				_refuelPoints = 0;
 
@@ -172,11 +172,12 @@ if (hasInterface) then
 
 				if (_refuelPoints > 0) then
 				{
-					AVS_CanRefuel = true;
-
 					if (!AVS_refuelActionAdded) then 
 					{
-						if (!AVS_Refueling) then {
+						if (!AVS_Refueling) then 
+						{
+							AVS_CanRefuel = true;
+
 							private ["_title", "_description"];
 							_title = "<t size='2' shadow='1'><t color='#00F600'>Start Refueling</t>";
 							_description = format ["<t size='1' shadow='1'><t color='#FFFFFF'>Fuel price: %1 Poptabs/L</t>", AVS_FuelCost];

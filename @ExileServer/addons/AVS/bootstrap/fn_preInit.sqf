@@ -192,7 +192,12 @@ if (AVS_FillCanisterActive) then
 	diag_log "AVS - Fill Canister Active.";
 };
 
-
 call AVS_fnc_sanitizegastation;
+
+//Vehicle debug markers:
+if (AVS_DebugMarkers) then
+{
+	AVS_PersistentLocationCount = 0;
+};
 
 diag_log "AVS - Initialized.";

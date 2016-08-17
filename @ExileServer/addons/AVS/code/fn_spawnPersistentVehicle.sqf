@@ -65,6 +65,7 @@ _vehicle call ExileServer_object_vehicle_database_update;
 // Add a debug marker
 if (AVS_DebugMarkers) then
 {
+	AVS_PersistentLocationCount = AVS_PersistentLocationCount + 1;
 	_debugMarker = createMarker ["vehicleMarker#"+str AVS_PersistentLocationCount, _positionReal];
 	_debugMarker setMarkerColor "ColorOrange";
 	_debugMarker setMarkerType "mil_dot_noShadow";

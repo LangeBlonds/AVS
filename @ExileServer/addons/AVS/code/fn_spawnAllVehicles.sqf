@@ -13,6 +13,8 @@ Return Value:
 	None
 */
 
+private ["_positionReal"];
+
 _getSpawnedVehicleTracker =
 {
 	diag_log format["getSpawnedVehicleTracker: %1", _this];
@@ -56,7 +58,7 @@ if (AVS_useSpawnedPersistentVehiclesLocation) then
 			}
 			else
 			{
-				_positionReal = [_position, 25, AVS_LocationSearchRadius, 5, 0 , 1 , 0 , _blacklistedPositions] call BIS_fnc_findSafePos;
+				_positionReal = [_position, 0, AVS_LocationSearchRadius, 5, 0 , 1 , 0 , _blacklistedPositions] call BIS_fnc_findSafePos;
 			};
 
 			[_uid, _classNames, _damage, _positionReal] call AVS_fnc_spawnPersistentVehicle;
