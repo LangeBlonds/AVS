@@ -16,7 +16,7 @@ class CfgPatches
 	{
 		units[] = {};
 		weapons[] = {};
-		AVS_Version = "1.4.3";
+		AVS_Version = "1.4.4";
 	};
 };
 
@@ -42,7 +42,7 @@ class CfgFunctions
 			class loadAmmo						{};
 			class rearmVehicle					{};
 			class refuelPayment					{};
-			class refuelVehicle					{};		
+			class refuelVehicle					{};
 			class sanitizeVehicle				{};
 			class saveAmmo						{};
 			class spawnAllVehicles				{};
