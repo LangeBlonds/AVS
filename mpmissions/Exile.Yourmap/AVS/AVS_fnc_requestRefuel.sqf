@@ -1,5 +1,5 @@
 /*
-© 2015 Zenix Gaming Ops
+Â© 2015 Zenix Gaming Ops
 Developed by Rod-Serling
 Co-Developed by Vishpala
 
@@ -26,3 +26,5 @@ if (!_OK) exitWith
 };
 
 [_vehicle] remoteExecCall ["AVS_fnc_refuelVehicle", 2];
+
+player removeAction AVS_refuelAction;
